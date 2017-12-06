@@ -30,11 +30,33 @@ xcode-select --install
 
 # Available Actions
 ## iOS
-### ios ci
+### ios test
 ```
-fastlane ios ci
+fastlane ios test
 ```
+Runs all the tests
+### ios jenkins
+```
+fastlane ios jenkins
+```
+Deploy a new version through jenkins
+### ios uploadfir
+```
+fastlane ios uploadfir
+```
+display to fir
+### ios beta
+```
+fastlane ios beta
+```
+Submit a new Beta Build to Apple TestFlight
 
+This will also make sure the profile is up to date
+### ios release
+```
+fastlane ios release
+```
+Deploy a new version to the App Store
 
 ----
 
