@@ -15,6 +15,31 @@ fastlane_version "2.68.2"
 
 default_platform :ios
 
+def updateProjectBuildNumber
+
+currentTime = Time.new.strftime("%Y%m%d")
+build = get_build_number()
+if build.include?"#{currentTime}."
+
+lastStr = build[build.length-2..build.length-1]
+lastNum = lastStr.to_i
+lastNum = lastNum + 1
+lastStr = lastNum.to_s
+if lastNum < 10
+lastStr = lastStr.insert(0,"0")
+end
+build = "#{currentTime}.#{lastStr}"
+else
+
+build = "#{currentTime}.01"
+end
+puts("*************| Change build #{build} |*************")
+
+increment_build_number(
+build_number: "#{build}"
+)
+end
+
 platform :ios do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
@@ -35,6 +60,8 @@ platform :ios do
     badge(dark: true)
 
     # build
+
+    updateProjectBuildNumber
 
     gym(
         workspace:"iOSTestDemo.xcworkspace",
